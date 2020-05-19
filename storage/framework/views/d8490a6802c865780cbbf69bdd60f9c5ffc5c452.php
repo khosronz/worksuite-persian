@@ -707,6 +707,10 @@
 
     <script src="<?php echo e(asset('plugins/bower_components/calendar/jquery-ui.min.js')); ?>"></script>
     <script src="<?php echo e(asset('plugins/bower_components/moment/moment.js')); ?>"></script>
+    <script src="<?php echo e(asset('plugins/bower_components/moment-jalaali/build/moment-jalaali.js')); ?>"></script>
+    <script>
+        moment().format('jYYYY/jM/jD').locale("fa", fa).loadPersian();
+    </script>
     <script src="<?php echo e(asset('plugins/bower_components/calendar/dist/fullcalendar.min.js')); ?>"></script>
     <script src="<?php echo e(asset('plugins/bower_components/calendar/dist/jquery.fullcalendar.js')); ?>"></script>
     <script src="<?php echo e(asset('plugins/bower_components/calendar/dist/locale-all.js')); ?>"></script>

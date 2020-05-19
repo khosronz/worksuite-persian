@@ -27,7 +27,7 @@
     <meta name="msapplication-TileImage" content="<?php echo e(asset('favicon/ms-icon-144x144.png')); ?>">
     <meta name="theme-color" content="#ffffff">
 
-    <title><?php echo app('translator')->get('app.adminPanel'); ?> | <?php echo e($pageTitle); ?></title>
+    <title><?php if($userRole): ?> <?php echo e($userRole->display_name); ?> <?php echo app('translator')->get("app.panel"); ?>  <?php else: ?> <?php echo app('translator')->get("app.employeePanel"); ?> <?php endif; ?> | <?php echo e($pageTitle); ?></title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo e(asset('plugins/bootstrap/dist/css/bootstrap.min.css')); ?>" rel="stylesheet">
     <link rel='stylesheet prefetch'
@@ -61,8 +61,8 @@
     <link href="<?php echo e(asset('css/rounded.css')); ?>" rel="stylesheet">
     <?php endif; ?>
 
-    <?php if(file_exists(public_path().'/css/admin-custom.css')): ?>
-    <link href="<?php echo e(asset('css/admin-custom.css')); ?>" rel="stylesheet">
+    <?php if(file_exists(public_path().'/css/member-custom.css')): ?>
+    <link href="<?php echo e(asset('css/member-custom.css')); ?>" rel="stylesheet">
     <?php endif; ?>
 
 
@@ -136,7 +136,7 @@
                         console.log('database id : '+db_onesignal_id);
 
                         if(db_onesignal_id == null || db_onesignal_id !== userId){ //update onesignal ID if it is new
-                           updateOnesignalPlayerId(userId);
+                            updateOnesignalPlayerId(userId);
                         }
 
 
@@ -151,50 +151,49 @@
     </script>
     <?php endif; ?>
 
-    <?php if($global->active_theme == 'custom'): ?>
     
+    <?php if($global->active_theme == 'custom'): ?>
     <style>
+
         :root {
-            --header_color: <?php echo e($adminTheme->header_color); ?>;
-            --sidebar_color: <?php echo e($adminTheme->sidebar_color); ?>;
-            --link_color: <?php echo e($adminTheme->link_color); ?>;
-            --sidebar_text_color: <?php echo e($adminTheme->sidebar_text_color); ?>;
+            --header_color: <?php echo e($employeeTheme->header_color); ?>;
+            --sidebar_color: <?php echo e($employeeTheme->sidebar_color); ?>;
+            --link_color: <?php echo e($employeeTheme->link_color); ?>;
+            --sidebar_text_color: <?php echo e($employeeTheme->sidebar_text_color); ?>;
         }
         .navbar-header {
-            background: var(--header_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
         }
-
         .sidebar-nav .notify {
             margin: 0 !important;
         }
         .sidebar .notify .heartbit {
-            border: 5px solid var(--header_color) !important;
+            border: 5px solid <?php echo e($employeeTheme->header_color); ?> !important;
             top: -23px !important;
             right: -15px !important;
         }
         .sidebar .notify .point {
-            background-color: var(--header_color) !important;
+            background-color: <?php echo e($employeeTheme->header_color); ?> !important;
             top: -13px !important;
         }
-
         .navbar-top-links > li > a {
-            color: var(--link_color);
+            color: <?php echo e($employeeTheme->link_color); ?>;
         }
         /*Right panel*/
         .right-sidebar .rpanel-title {
-            background: var(--header_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
         }
         /*Bread Crumb*/
         .bg-title .breadcrumb .active {
-            color: var(--header_color);
+            color: <?php echo e($employeeTheme->header_color); ?>;
         }
         /*Sidebar*/
         .sidebar {
-            background: var(--sidebar_color);
+            background: <?php echo e($employeeTheme->sidebar_color); ?>;
             box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
         }
         .sidebar .label-custom {
-            background: var(--header_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
         }
         #side-menu li a, #side-menu > li:not(.user-pro) > a {
             color: var(--sidebar_text_color);
@@ -219,15 +218,15 @@
             color: var(--header_color);
         }
         .sidebar #side-menu .user-pro .nav-second-level a:hover {
-            color: var(--header_color);
+            color: <?php echo e($employeeTheme->header_color); ?>;
         }
         .nav-small-cap {
-            color: var(--sidebar_text_color);
+            color: <?php echo e($employeeTheme->sidebar_text_color); ?>;
         }
         /* .content-wrapper .sidebar .nav-second-level li {
             background: #444859;
-        } */
-        /* @media (min-width: 768px) {
+        }
+        @media (min-width: 768px) {
             .content-wrapper #side-menu ul,
             .content-wrapper .sidebar #side-menu > li:hover,
             .content-wrapper .sidebar .nav-second-level > li > a {
@@ -237,58 +236,58 @@
 
         /*themecolor*/
         .bg-theme {
-            background-color: var(--header_color) !important;
+            background-color: <?php echo e($employeeTheme->header_color); ?> !important;
         }
         .bg-theme-dark {
-            background-color: var(--sidebar_color) !important;
+            background-color: <?php echo e($employeeTheme->sidebar_color); ?> !important;
         }
         /*Chat widget*/
         .chat-list .odd .chat-text {
-            background: var(--header_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
         }
         /*Button*/
         .btn-custom {
-            background: var(--header_color);
-            border: 1px solid var(--header_color);
-            color: var(--link_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
+            border: 1px solid <?php echo e($employeeTheme->header_color); ?>;
+            color: <?php echo e($employeeTheme->link_color); ?>;
         }
         .btn-custom:hover {
-            background: var(--header_color);
-            border: 1px solid var(--header_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
+            border: 1px solid <?php echo e($employeeTheme->header_color); ?>;
         }
         /*Custom tab*/
         .customtab li.active a,
         .customtab li.active a:hover,
         .customtab li.active a:focus {
-            border-bottom: 2px solid var(--header_color);
-            color: var(--header_color);
+            border-bottom: 2px solid <?php echo e($employeeTheme->header_color); ?>;
+            color: <?php echo e($employeeTheme->header_color); ?>;
         }
         .tabs-vertical li.active a,
         .tabs-vertical li.active a:hover,
         .tabs-vertical li.active a:focus {
-            background: var(--header_color);
-            border-right: 2px solid var(--header_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
+            border-right: 2px solid <?php echo e($employeeTheme->header_color); ?>;
         }
         /*Nav-pills*/
         .nav-pills > li.active > a,
         .nav-pills > li.active > a:focus,
         .nav-pills > li.active > a:hover {
-            background: var(--header_color);
-            color: var(--link_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
+            color: <?php echo e($employeeTheme->link_color); ?>;
         }
 
-        .admin-panel-name{
-            background: var(--header_color);
+        .member-panel-name{
+            background: <?php echo e($employeeTheme->header_color); ?>;
         }
 
         /*fullcalendar css*/
         .fc th.fc-widget-header{
-            background: var(--sidebar_color);
+            background: <?php echo e($employeeTheme->sidebar_color); ?>;
         }
 
         .fc-button{
-            background: var(--header_color);
-            color: var(--link_color);
+            background: <?php echo e($employeeTheme->header_color); ?>;
+            color: <?php echo e($employeeTheme->link_color); ?>;
             margin-left: 2px !important;
         }
 
@@ -297,29 +296,28 @@
         }
 
         .user-pro{
-            background-color: var(--sidebar_color);
+            background-color: <?php echo e($employeeTheme->sidebar_color); ?>;
         }
 
-
         .top-left-part{
-            background: var(--sidebar_color);
+            background: <?php echo e($employeeTheme->sidebar_color); ?>;
         }
 
         .notify .heartbit{
-            border: 5px solid var(--sidebar_color);
+            border: 5px solid <?php echo e($employeeTheme->sidebar_color); ?>;
         }
 
         .notify .point{
-            background-color: var(--sidebar_color);
+            background-color: <?php echo e($employeeTheme->sidebar_color); ?>;
         }
     </style>
 
     <style>
-        <?php echo $adminTheme->user_css; ?>
+        <?php echo $employeeTheme->user_css; ?>
 
     </style>
-    
     <?php endif; ?>
+    
 
     <style>
         .sidebar .notify  {
@@ -333,8 +331,8 @@
         top: -13px !important;
         }
         .top-notifications .message-center .user-img{
-             margin: 0 0 0 0 !important;
-         }
+            margin: 0 0 0 0 !important;
+        }
     </style>
 
 
@@ -346,7 +344,7 @@
 </div>
 <div id="wrapper">
     <!-- Left navbar-header -->
-    <?php echo $__env->make('sections.left_sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    <?php echo $__env->make('sections.member_left_sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
             <!-- Left navbar-header end -->
     <!-- Page Content -->
     <div id="page-wrapper" class="row">
@@ -354,10 +352,7 @@
 
             <?php if(!empty($__env->yieldContent('filter-section'))): ?>
                 <div class="col-md-3 filter-section">
-                    <h5 class="pull-left"><i class="fa fa-sliders"></i> <?php echo app('translator')->get('app.filterResults'); ?></h5>
-                    <h5 class="pull-right hidden-sm hidden-md hidden-xs">
-                        <button class="btn btn-default btn-xs btn-outline btn-circle filter-section-close" ><i class="fa fa-chevron-left"></i></button>
-                    </h5>
+                    <h5><i class="fa fa-sliders"></i> <?php echo app('translator')->get('app.filterResults'); ?></h5>
                     <?php echo $__env->yieldContent('filter-section'); ?>
                 </div>
              <?php endif; ?>
@@ -375,8 +370,8 @@
             <?php else: ?>
             col-md-12
             <?php endif; ?>
-                    data-section">
-                <button class="btn btn-default btn-xs btn-outline btn-circle m-t-5 filter-section-show hidden-sm hidden-md hidden-xs" style="display:none"><i class="fa fa-chevron-right"></i></button>
+            data-section">
+
                 <?php if(!empty($__env->yieldContent('filter-section')) || !empty($__env->yieldContent('other-section'))): ?>
                     <div class="row hidden-md hidden-lg">
                         <div class="col-xs-12 p-l-25 m-t-10">
@@ -399,6 +394,30 @@
     <!-- /#page-wrapper -->
 </div>
 <!-- /#wrapper -->
+
+
+
+<div class="modal fade bs-modal-md in" id="projectTimerModal" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg" id="modal-data-application">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <span class="caption-subject font-red-sunglo bold uppercase" id="modelHeading"></span>
+            </div>
+            <div class="modal-body">
+                Loading...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn blue">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
 
 
 <div id="footer-sticky-notes" class="row hidden-xs hidden-sm">
@@ -458,29 +477,6 @@
 
 
 
-<div class="modal fade bs-modal-md in" id="projectTimerModal" role="dialog" aria-labelledby="myModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-lg" id="modal-data-application">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <span class="caption-subject font-red-sunglo bold uppercase" id="modelHeading"></span>
-            </div>
-            <div class="modal-body">
-                Loading...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn blue">Save changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-
-
-
 <div id="responsive-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -488,6 +484,7 @@
         </div>
     </div>
 </div>
+
 
 
 <div class="modal fade bs-modal-md in" id="projectTimerModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -560,13 +557,12 @@
 <script src="<?php echo e(asset('plugins/bower_components/icheck/icheck.init.js')); ?>"></script>
 <script src="<?php echo e(asset('js/jquery.magnific-popup.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/jquery.magnific-popup-init.js')); ?>"></script>
-
 <script src="https://js.pusher.com/5.0/pusher.min.js"></script>
 
 <script>
 
-    $('body').on('click', '.timer-modal', function(){
-        var url = '<?php echo e(route('admin.all-time-logs.show-active-timer')); ?>';
+    $('body').on('click', '.active-timer-modal', function(){
+        var url = '<?php echo e(route('member.all-time-logs.show-active-timer')); ?>';
         $('#modelHeading').html('Active Timer');
         $.ajaxModal('#projectTimerModal',url);
     });
@@ -576,15 +572,25 @@
         $(this).attr("autocomplete", "off");
     });
 
+    function updateOnesignalPlayerId(userId) {
+        $.easyAjax({
+            url: '<?php echo e(route("member.profile.updateOneSignalId")); ?>',
+            type: 'POST',
+            data:{'userId':userId, '_token':'<?php echo e(csrf_token()); ?>'},
+            success: function (response) {
+            }
+        })
+    }
+
     function addOrEditStickyNote(id)
     {
         var url = '';
         var method = 'POST';
         if(id === undefined || id == "" || id == null) {
-            url =  '<?php echo e(route('admin.sticky-note.store')); ?>'
+            url =  '<?php echo e(route('member.sticky-note.store')); ?>'
         } else{
 
-            url = "<?php echo e(route('admin.sticky-note.update',':id')); ?>";
+            url = "<?php echo e(route('member.sticky-note.update',':id')); ?>";
             url = url.replace(':id', id);
             var stickyID = $('#stickyID').val();
             method = 'PUT'
@@ -606,7 +612,7 @@
 
     // FOR SHOWING FEEDBACK DETAIL IN MODEL
     function showCreateNoteModal(){
-        var url = '<?php echo e(route('admin.sticky-note.create')); ?>';
+        var url = '<?php echo e(route('member.sticky-note.create')); ?>';
 
         $("#responsive-modal").removeData('bs.modal').modal({
             remote: url,
@@ -623,7 +629,7 @@
 
     // FOR SHOWING FEEDBACK DETAIL IN MODEL
     function showEditNoteModal(id){
-        var url = '<?php echo e(route('admin.sticky-note.edit',':id')); ?>';
+        var url = '<?php echo e(route('member.sticky-note.edit',':id')); ?>';
         url  = url.replace(':id',id);
 
         $("#responsive-modal").removeData('bs.modal').modal({
@@ -662,7 +668,7 @@
         }, function(isConfirm){
             if (isConfirm) {
 
-                var url = "<?php echo e(route('admin.sticky-note.destroy',':id')); ?>";
+                var url = "<?php echo e(route('member.sticky-note.destroy',':id')); ?>";
                 url = url.replace(':id', id);
 
                 var token = "<?php echo e(csrf_token()); ?>";
@@ -685,7 +691,7 @@
     //getting all chat data according to user
     function getNoteData(){
 
-        var url = "<?php echo e(route('admin.sticky-note.index')); ?>";
+        var url = "<?php echo e(route('member.sticky-note.index')); ?>";
 
         $.easyAjax({
             type: 'GET',
@@ -700,57 +706,8 @@
             }
         });
     }
-</script>
 
-
-<script>
-    $('.mark-notification-read').click(function () {
-        console.log('hello from read notification');
-        var token = '<?php echo e(csrf_token()); ?>';
-        $.easyAjax({
-            type: 'POST',
-            url: '<?php echo e(route("mark-notification-read")); ?>',
-            data: {'_token': token},
-            success: function (data) {
-                if (data.status == 'success') {
-                    $('.top-notifications').remove();
-                    $('.top-notification-count').html('0');
-                    $('#top-notification-dropdown .notify').remove();
-                    $('.notify').remove();
-                }
-            }
-        });
-
-    });
-
-    $('.show-all-notifications').click(function () {
-        var url = '<?php echo e(route('show-all-member-notifications')); ?>';
-        $('#modelHeading').html('View Unread Notifications');
-        $.ajaxModal('#projectTimerModal', url);
-    });
-
-    $('.submit-search').click(function () {
-        $(this).parent().submit();
-    });
-
-    $(function () {
-        $('.selectpicker').selectpicker();
-    });
-
-    $('.language-switcher').change(function () {
-        var lang = $(this).val();
-        $.easyAjax({
-            url: '<?php echo e(route("admin.settings.change-language")); ?>',
-            data: {'lang': lang},
-            success: function (data) {
-                if (data.status == 'success') {
-                    window.location.reload();
-                }
-            }
-        });
-    });
-
-//    sticky notes script
+    //    sticky notes script
     var stickyNoteOpen = $('#open-sticky-bar');
     var stickyNoteClose = $('#close-sticky-bar');
     var stickyNotes = $('#footer-sticky-notes');
@@ -779,93 +736,112 @@
         stickyNoteClose.toggle();
     })
 
+</script>
 
-
-    $('body').on('click', '.right-side-toggle', function () {
-        $(".right-sidebar").slideDown(50).removeClass("shw-rside");
-    })
-
-
-    function updateOnesignalPlayerId(userId) {
-        $.easyAjax({
-            url: '<?php echo e(route("member.profile.updateOneSignalId")); ?>',
-            type: 'POST',
-            data:{'userId':userId, '_token':'<?php echo e(csrf_token()); ?>'},
-            success: function (response) {
-            }
-        })
-    }
-
-    $('.table-responsive').on('show.bs.dropdown', function () {
-        $('.table-responsive').css( "overflow", "inherit" );
+<script>
+    $('body').on('click', '.timer-modal', function(){
+        var url = '<?php echo e(route('member.time-log.create')); ?>';
+        $('#modelHeading').html('Start Timer For a Project');
+        $.ajaxModal('#projectTimerModal',url);
     });
 
-    $('.table-responsive').on('hide.bs.dropdown', function () {
-        $('.table-responsive').css( "overflow", "auto" );
-    })
+    $('body').on('click', '.stop-timer-modal', function(){
+        var url = '<?php echo e(route('member.time-log.show', ':id')); ?>';
+        url = url.replace(':id', $(this).data('timer-id'));
 
-    $('#mobile-filter-toggle').click(function () {
-        $('.filter-section').toggle();
-    })
+        $('#modelHeading').html('Stop Timer');
+        $.ajaxModal('#projectTimerModal',url);
+    });
+
+    $('.mark-notification-read').click(function () {
+        var token = '<?php echo e(csrf_token()); ?>';
+        $.easyAjax({
+            type: 'POST',
+            url: '<?php echo e(route("mark-notification-read")); ?>',
+            data: {'_token': token},
+            success: function (data) {
+                if(data.status == 'success'){
+                    $('.top-notifications').remove();
+                    $('.top-notification-count').html('0');
+                    $('#top-notification-dropdown .notify').remove();
+                    $('.notify').remove()
+                }
+            }
+        });
+
+    });
+
+    $('.show-all-notifications').click(function () {
+        var url = '<?php echo e(route('show-all-member-notifications')); ?>';
+        $('#modelHeading').html('View Unread Notifications');
+        $.ajaxModal('#projectTimerModal',url);
+    });
 
     $('#sticky-note-toggle').click(function () {
         $('#footer-sticky-notes').toggle();
         $('#sticky-note-toggle').hide();
     })
 
-    $(document).ready(function () {
-        //Side menu active hack
-        setTimeout(function(){
-            var getActiveMenu = $('#side-menu  li.active li a.active').length;
-        // console.log(getActiveMenu);
-            if(getActiveMenu > 0) {
-                $('#side-menu  li.active li a.active').parent().parent().parent().find('a:first').addClass('active');
-            }
-
-         }, 200);
-
+    $('body').on('click', '.right-side-toggle', function () {
+        $(".right-sidebar").slideDown(50).removeClass("shw-rside");
     })
-
-    $('body').on('click', '.toggle-password', function() {
-        var $selector = $(this).parent().find('input.form-control');
-        $(this).toggleClass("fa-eye fa-eye-slash");
-        var $type = $selector.attr("type") === "password" ? "text" : "password";
-        $selector.attr("type", $type);
-    });
-
-    var currentUrl = '<?php echo e(request()->route()->getName()); ?>';
-    $('body').on('click', '.filter-section-close', function() {
-        localStorage.setItem('filter-'+currentUrl, 'hide');
-
-        $('.filter-section').toggle();
-        $('.filter-section-show').toggle();
-        $('.data-section').toggleClass("col-md-9 col-md-12")
-    });
-
-    $('body').on('click', '.filter-section-show', function() {
-        localStorage.setItem('filter-'+currentUrl, 'show');
-
-        $('.filter-section-show').toggle();
-        $('.data-section').toggleClass("col-md-9 col-md-12")
-        $('.filter-section').toggle();
-    });
-
-    var currentUrl = '<?php echo e(request()->route()->getName()); ?>';
-    var checkCurrentUrl = localStorage.getItem('filter-'+currentUrl);
-    if (checkCurrentUrl == "hide") {
-        $('.filter-section-show').show();
-        $('.data-section').removeClass("col-md-9")
-        $('.data-section').addClass("col-md-12")
-        $('.filter-section').hide();
-    } else if (checkCurrentUrl == "show") {
-        $('.filter-section-show').hide();
-        $('.data-section').removeClass("col-md-12")
-        $('.data-section').addClass("col-md-9")
-        $('.filter-section').show();
-    }
-
-
 </script>
+
+<?php if(!is_null($timer)): ?>
+    <script>
+
+        $(document).ready(function(e) {
+            var $worked = $("#active-timer");
+            function updateTimer() {
+                var myTime = $worked.html();
+                var ss = myTime.split(":");
+//            console.log(ss);
+
+                var hours = ss[0];
+                var mins = ss[1];
+                var secs = ss[2];
+                secs = parseInt(secs)+1;
+
+                if(secs > 59){
+                    secs = '00';
+                    mins = parseInt(mins)+1;
+                }
+
+                if(mins > 59){
+                    secs = '00';
+                    mins = '00';
+                    hours = parseInt(hours)+1;
+                }
+
+                if(hours.toString().length < 2) {
+                    hours = '0'+hours;
+                }
+                if(mins.toString().length < 2) {
+                    mins = '0'+mins;
+                }
+                if(secs.toString().length < 2) {
+                    secs = '0'+secs;
+                }
+                var ts = hours+':'+mins+':'+secs;
+
+//            var dt = new Date();
+//            dt.setHours(ss[0]);
+//            dt.setMinutes(ss[1]);
+//            dt.setSeconds(ss[2]);
+//            var dt2 = new Date(dt.valueOf() + 1000);
+//            var ts = dt2.toTimeString().split(" ")[0];
+                $worked.html(ts);
+                setTimeout(updateTimer, 1000);
+            }
+            setTimeout(updateTimer, 1000);
+        });
+
+    </script>
+
+
+
+
+<?php endif; ?>
 
 <?php if($pusherSettings->status): ?>
 <script>
@@ -884,8 +860,9 @@ var pusher = new Pusher("<?php echo e($pusherSettings->pusher_app_key); ?>", {
 
 <?php endif; ?>
 
+
 <?php echo $__env->yieldPushContent('footer-script'); ?>
 
 </body>
 </html>
-<?php /**PATH C:\wamp64\www\worksuite\resources\views/layouts/app.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\wamp64\www\worksuite\resources\views/layouts/member-app.blade.php ENDPATH**/ ?>

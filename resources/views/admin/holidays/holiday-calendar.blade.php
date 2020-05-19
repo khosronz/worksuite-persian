@@ -158,7 +158,7 @@
 
 </script>
 
-<script src="{{ asset('plugins/bower_components/calendar/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('plugins/bower_co`mponents/calendar/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/moment/moment.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/calendar/dist/fullcalendar.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/calendar/dist/jquery.fullcalendar.js') }}"></script>

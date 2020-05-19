@@ -7,11 +7,14 @@
         <!-- /.page title -->
         <!-- .breadcrumb -->
         <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-            <a href="#" data-toggle="modal" data-target="#my-event" class="btn btn-sm btn-success btn-outline waves-effect waves-light">
-                <i class="ti-plus"></i> <?php echo app('translator')->get('modules.events.addEvent'); ?>
-            </a>
+            <?php if($user->can('add_events')): ?>
+                <a href="#" data-toggle="modal" data-target="#my-event" class="btn btn-sm btn-success btn-outline waves-effect waves-light">
+                    <i class="ti-plus"></i> <?php echo app('translator')->get('modules.events.addEvent'); ?>
+                </a>
+            <?php endif; ?>
+
             <ol class="breadcrumb">
-                <li><a href="<?php echo e(route('admin.dashboard')); ?>"><?php echo app('translator')->get('app.menu.home'); ?></a></li>
+                <li><a href="<?php echo e(route('member.dashboard')); ?>"><?php echo app('translator')->get('app.menu.home'); ?></a></li>
                 <li class="active"><?php echo e($pageTitle); ?></li>
             </ol>
         </div>
@@ -35,6 +38,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="white-box">
+
                 <div id="calendar"></div>
             </div>
         </div>
@@ -48,7 +52,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title"><i class="icon-plus"></i> <?php echo app('translator')->get('modules.events.addEvent'); ?></h4>
+                    <h4 class="modal-title"><i class="icon-plus"></i> Add Event</h4>
                 </div>
                 <div class="modal-body">
                     <?php echo Form::open(['id'=>'createEvent','class'=>'ajax-form','method'=>'POST']); ?>
@@ -93,13 +97,13 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-xs-12 col-md-3 ">
+                            <div class="col-xs-6 col-md-3 ">
                                 <div class="form-group">
                                     <label class="required"><?php echo app('translator')->get('modules.events.startOn'); ?></label>
-                                    <input type="text" name="start_date" id="start_date" class="form-control" autocomplete="none">
+                                    <input type="text" name="start_date" id="start_date" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-md-3">
+                            <div class="col-xs-6 col-md-3">
                                 <div class="input-group bootstrap-timepicker timepicker">
                                     <label>&nbsp;</label>
                                     <input type="text" name="start_time" id="start_time"
@@ -107,13 +111,13 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-md-3">
+                            <div class="col-xs-6 col-md-3">
                                 <div class="form-group">
                                     <label class="required"><?php echo app('translator')->get('modules.events.endOn'); ?></label>
-                                    <input type="text" name="end_date" id="end_date" class="form-control" autocomplete="none">
+                                    <input type="text" name="end_date" id="end_date" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-md-3">
+                            <div class="col-xs-6 col-md-3">
                                 <div class="input-group bootstrap-timepicker timepicker">
                                     <label>&nbsp;</label>
                                     <input type="text" name="end_time" id="end_time"
@@ -135,7 +139,7 @@
                                 </div>
                                 <div class="form-group">
                                     <select class="select2 m-b-10 select2-multiple " multiple="multiple"
-                                            data-placeholder="<?php echo app('translator')->get('modules.messages.chooseMember'); ?>, <?php echo app('translator')->get('modules.projects.selectClient'); ?>" name="user_id[]">
+                                            data-placeholder="Choose Members, Clients" name="user_id[]">
                                         <?php $__currentLoopData = $employees; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $emp): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <option value="<?php echo e($emp->id); ?>"><?php echo e(ucwords($emp->name)); ?> <?php if($emp->id == $user->id): ?>
                                                     (YOU) <?php endif; ?></option>
@@ -170,10 +174,10 @@
                                 <div class="form-group">
                                     <label>&nbsp;</label>
                                     <select name="repeat_type" id="" class="form-control">
-                                        <option value="day"><?php echo app('translator')->get('app.day'); ?></option>
-                                        <option value="week"><?php echo app('translator')->get('app.week'); ?></option>
-                                        <option value="month"><?php echo app('translator')->get('app.month'); ?></option>
-                                        <option value="year"><?php echo app('translator')->get('app.year'); ?></option>
+                                        <option value="day">Day(s)</option>
+                                        <option value="week">Week(s)</option>
+                                        <option value="month">Month(s)</option>
+                                        <option value="year">Year(s)</option>
                                     </select>
                                 </div>
                             </div>
@@ -186,44 +190,14 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <div class="checkbox checkbox-info">
-                                        <input id="send_reminder" name="send_reminder" value="yes"
-                                                type="checkbox">
-                                        <label for="send_reminder"><?php echo app('translator')->get('modules.tasks.reminder'); ?></label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row" id="reminder-fields" style="display: none;">
-                            <div class="col-xs-6 col-md-3">
-                                <div class="form-group">
-                                    <label><?php echo app('translator')->get('modules.events.remindBefore'); ?></label>
-                                    <input type="number" min="1" value="1" name="remind_time" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <div class="form-group">
-                                    <label>&nbsp;</label>
-                                    <select name="remind_type" id="" class="form-control">
-                                        <option value="day"><?php echo app('translator')->get('app.day'); ?></option>
-                                        <option value="hour"><?php echo app('translator')->get('app.hour'); ?></option>
-                                        <option value="minute"><?php echo app('translator')->get('app.minute'); ?></option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                     <?php echo Form::close(); ?>
 
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-white waves-effect" data-dismiss="modal"><?php echo app('translator')->get('app.close'); ?></button>
-                    <button type="button" class="btn btn-success save-event waves-effect waves-light"><?php echo app('translator')->get('app.submit'); ?></button>
+                    <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
                 </div>
             </div>
         </div>
@@ -267,10 +241,10 @@
             className: '<?php echo e($event->label_color); ?>'
         },
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    ];
+];
 
     var getEventDetail = function (id) {
-        var url = '<?php echo e(route('admin.events.show', ':id')); ?>';
+        var url = '<?php echo e(route('member.events.show', ':id')); ?>';
         url = url.replace(':id', id);
 
         $('#modelHeading').html('Event');
@@ -322,53 +296,50 @@
     });
 
     function addEventModal(start, end, allDay){
-        if(start){
-            // var sd = new Date(start);
-            // var curr_date = sd.getDate();
-            // if(curr_date < 10){
-            //     curr_date = '0'+curr_date;
-            // }
-            // var curr_month = sd.getMonth();
-            // curr_month = curr_month+1;
-            // if(curr_month < 10){
-            //     curr_month = '0'+curr_month;
-            // }
-            // var curr_year = sd.getFullYear();
+        <?php if($user->can('add_events')): ?>
+            if(start){
+                var sd = new Date(start);
+                var curr_date = sd.getDate();
+                if(curr_date < 10){
+                    curr_date = '0'+curr_date;
+                }
+                var curr_month = sd.getMonth();
+                curr_month = curr_month+1;
+                if(curr_month < 10){
+                    curr_month = '0'+curr_month;
+                }
+                var curr_year = sd.getFullYear();
 
-            // $('#start_date').val(curr_month+'/'+curr_date+'/'+curr_year);
+                $('#start_date').val(curr_month+'/'+curr_date+'/'+curr_year);
 
-            // var ed = new Date(start);
-            // var curr_date = sd.getDate();
-            // if(curr_date < 10){
-            //     curr_date = '0'+curr_date;
-            // }
-            // var curr_month = sd.getMonth();
-            // curr_month = curr_month+1;
-            // if(curr_month < 10){
-            //     curr_month = '0'+curr_month;
-            // }
-            // var curr_year = ed.getFullYear();
-            // $('#end_date').val(curr_month+'/'+curr_date+'/'+curr_year);
+                var ed = new Date(start);
+                var curr_date = sd.getDate();
+                if(curr_date < 10){
+                    curr_date = '0'+curr_date;
+                }
+                var curr_month = sd.getMonth();
+                curr_month = curr_month+1;
+                if(curr_month < 10){
+                    curr_month = '0'+curr_month;
+                }
+                var curr_year = ed.getFullYear();
+                $('#end_date').val(curr_month+'/'+curr_date+'/'+curr_year);
 
-            $('#start_date, #end_date').datepicker('destroy');
-            jQuery('#start_date, #end_date').datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                format: '<?php echo e($global->date_picker_format); ?>'
-            })
+                $('#start_date, #end_date').datepicker('destroy');
+                jQuery('#start_date, #end_date').datepicker({
+                    autoclose: true,
+                    todayHighlight: true
+                })
+            }
 
-            jQuery('#start_date').datepicker('setDate', new Date(start));
-            jQuery('#end_date').datepicker('setDate', new Date(start));
-
-        }
-
-        $('#my-event').modal('show');
+            $('#my-event').modal('show');
+        <?php endif; ?>
 
     }
 
     $('.save-event').click(function () {
         $.easyAjax({
-            url: '<?php echo e(route('admin.events.store')); ?>',
+            url: '<?php echo e(route('member.events.store')); ?>',
             container: '#modal-data-application',
             type: "POST",
             data: $('#createEvent').serialize(),
@@ -389,17 +360,7 @@
         }
     })
 
-    $('#send_reminder').change(function () {
-        if($(this).is(':checked')){
-            $('#reminder-fields').show();
-        }
-        else{
-            $('#reminder-fields').hide();
-        }
-    })
-
 </script>
-
 <?php $__env->stopPush(); ?>
 
-<?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\worksuite\resources\views/admin/event-calendar/index.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.member-app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\wamp64\www\worksuite\resources\views/member/event-calendar/index.blade.php ENDPATH**/ ?>
