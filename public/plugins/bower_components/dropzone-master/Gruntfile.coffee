@@ -68,7 +68,7 @@ module.exports = (grunt) ->
 
 
   grunt.loadNpmTasks "grunt-contrib-coffee"
-  grunt.loadNpmTasks "grunt-contrib-sass"
+  grunt.loadNpmTasks "grunt-contrib-scss"
   grunt.loadNpmTasks "grunt-contrib-concat"
   grunt.loadNpmTasks "grunt-contrib-watch"
   grunt.loadNpmTasks "grunt-contrib-uglify"
@@ -76,7 +76,7 @@ module.exports = (grunt) ->
   # Default tasks
   grunt.registerTask "default", [ "downloads" ]
 
-  grunt.registerTask "css", "Compile the sass files to css", [ "sass" ]
+  grunt.registerTask "css", "Compile the scss files to css", [ "sass" ]
 
   grunt.registerTask "js", "Compile coffeescript", [ "coffee", "concat" ]
 

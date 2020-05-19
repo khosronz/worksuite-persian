@@ -234,7 +234,7 @@ if(file_exists(base_path('Modules/RestAPI/Config/config.php'))){
                 'scaffold/config' => 'Config/config.php',
                 'composer' => 'composer.json',
                 'assets/js/app' => 'Resources/assets/js/app.js',
-                'assets/sass/app' => 'Resources/assets/sass/app.scss',
+                'assets/scss/app' => 'Resources/assets/scss/app.scss',
                 'webpack' => 'webpack.mix.js',
                 'package' => 'package.json',
             ],
