@@ -13,8 +13,8 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-    'recaptchaFailed' => 'Recaptcha not validated.',
+    'failed' => 'این اعتبارنامه با سوابق ما مطابقت ندارد.',
+    'throttle' => 'تلاشهای زیادی برای ورود به سیستم رخ داده است. لطفا :seconds ثانیه دیگر مجددا تلاش کنید.',
+    'recaptchaFailed' => 'Recaptcha معتبر نیست.',
 
 ];
