@@ -47,7 +47,7 @@
     @stack('head-script')
     @stack('head-style')
 
-            <!-- This is a Custom CSS -->
+    <!-- This is a Custom CSS -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- color CSS you can use different color css from css/colors folder -->
     <!-- We have chosen the skin-blue (default.css) for this starter
@@ -336,6 +336,10 @@
              margin: 0 0 0 0 !important;
          }
     </style>
+
+
+
+    <link href="{{ asset('fonts/Iransans/main.css') }}" rel="stylesheet">
 
 
 </head>
