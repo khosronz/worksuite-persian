@@ -138,6 +138,7 @@
 
      console.log(taskEvents);
     var calendarLocale = '{{ $global->locale }}';
+    var calendarLocale = 'fa';
 
     var date = new Date();
     var y = date.getFullYear();

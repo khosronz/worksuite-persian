@@ -45,6 +45,7 @@
     <link href="{{ asset('css/animate.css') }}" rel="stylesheet">
 
     @stack('head-script')
+    @stack('head-style')
 
             <!-- This is a Custom CSS -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">

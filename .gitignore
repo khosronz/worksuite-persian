@@ -1,7 +1,11 @@
+/.idea
+/.vscode
+/.vagrant
 /node_modules
 /public/hot
 /public/storage
 /storage/*.key
+/storage/logs/*
 /vendor
 .env.backup
 .phpunit.result.cache
@@ -11,4 +15,3 @@ npm-debug.log
 yarn-error.log
 .idea
 /comp/*
-app
