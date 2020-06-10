@@ -4,6 +4,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/framework/*
 /storage/*.key
 /storage/logs/*
 /vendor
