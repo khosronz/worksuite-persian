@@ -22,14 +22,90 @@
 @endsection
 
 @push('head-script')
-<link rel="stylesheet" href="{{ asset('plugins/bower_components/calendar/dist/fullcalendar.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/bower_components/timepicker/bootstrap-timepicker.min.css') }}">
+    <link href='{{asset('/fullcalendar4/packages/core/main.css')}}' rel='stylesheet' />
+    <link href='{{asset('/fullcalendar4/packages/daygrid/main.css')}}' rel='stylesheet' />
+    <link href='{{asset('/fullcalendar4/packages/timegrid/main.css')}}' rel='stylesheet' />
+    <link href='{{asset('/fullcalendar4/packages/list/main.css')}}' rel='stylesheet' />
+    <script src='{{asset('/fullcalendar4/packages/core/main.js')}}'></script>
+    <script src='{{asset('/fullcalendar4/packages/core/locales-all')}}.js'></script>
+    <script src='{{asset('/fullcalendar4/packages/interaction/main.js')}}'></script>
+    <script src='{{asset('/fullcalendar4/packages/daygrid/main.js')}}'></script>
+    <script src='{{asset('/fullcalendar4/packages/timegrid/main.js')}}'></script>
+    <script src='{{asset('/fullcalendar4/packages/list/main.js')}}'></script>
+    <script>
 
-<link rel="stylesheet" href="{{ asset('plugins/bower_components/custom-select/custom-select.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/bower_components/multiselect/css/multi-select.css') }}">
-<link rel="stylesheet" href="{{ asset('plugins/bootstrap-colorselector/bootstrap-colorselector.min.css') }}">
+        document.addEventListener('DOMContentLoaded', function() {
+            var initialLocaleCode = 'fa';
+            var localeSelectorEl = document.getElementById('locale-selector');
+            var calendarEl = document.getElementById('calendar');
+
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: [ 'interaction', 'dayGrid', 'timeGrid', 'list' ],
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+                },
+                defaultDate: '2020-02-12',
+                locale: initialLocaleCode,
+                buttonIcons: false, // show the prev/next text
+                weekNumbers: true,
+                navLinks: true, // can click day/week names to navigate views
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+                data: [
+
+                ]
+            });
+
+            calendar.render();
+
+            // build the locale selector's options
+            calendar.getAvailableLocaleCodes().forEach(function(localeCode) {
+                var optionEl = document.createElement('option');
+                optionEl.value = localeCode;
+                optionEl.selected = localeCode == initialLocaleCode;
+                optionEl.innerText = localeCode;
+                localeSelectorEl.appendChild(optionEl);
+            });
+
+            // when the selected option changes, dynamically change the calendar option
+            localeSelectorEl.addEventListener('change', function() {
+                if (this.value) {
+                    calendar.setOption('locale', this.value);
+                }
+            });
+
+        });
+
+    </script>
+@endpush
+@push('head-style')
+    <style>
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
+            font-size: 14px;
+        }
+
+        #top {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            padding: 0 10px;
+            line-height: 40px;
+            font-size: 12px;
+        }
+
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 10px;
+        }
+
+    </style>
+
 @endpush
 
 @section('content')
@@ -42,6 +118,8 @@
         </div>
     </div>
     <!-- .row -->
+
+
 
     <!-- BEGIN MODAL -->
     <div class="modal fade bs-modal-md in" id="my-event" role="dialog" aria-labelledby="myModalLabel"
@@ -192,7 +270,7 @@
                                 <div class="col-xs-6">
                                     <div class="checkbox checkbox-info">
                                         <input id="send_reminder" name="send_reminder" value="yes"
-                                                type="checkbox">
+                                               type="checkbox">
                                         <label for="send_reminder">@lang('modules.tasks.reminder')</label>
                                     </div>
                                 </div>
@@ -251,149 +329,146 @@
         <!-- /.modal-dialog -->
     </div>
     {{--Ajax Modal Ends--}}
-
 @endsection
 
 @push('footer-script')
+    <script>
+        var taskEvents = [
+                @foreach($events as $event)
+            {
+                id: '{{ ucfirst($event->id) }}',
+                title: '{{ ucfirst($event->event_name) }}',
+                start: '{{ $event->start_date_time }}',
+                end:  '{{ $event->end_date_time }}',
+                className: '{{ $event->label_color }}'
+            },
+            @endforeach
+        ];
 
-<script>
-    var taskEvents = [
-        @foreach($events as $event)
-        {
-            id: '{{ ucfirst($event->id) }}',
-            title: '{{ ucfirst($event->event_name) }}',
-            start: '{{ $event->start_date_time }}',
-            end:  '{{ $event->end_date_time }}',
-            className: '{{ $event->label_color }}'
-        },
-        @endforeach
-    ];
+        var getEventDetail = function (id) {
+            var url = '{{ route('admin.events.show', ':id')}}';
+            url = url.replace(':id', id);
 
-    var getEventDetail = function (id) {
-        var url = '{{ route('admin.events.show', ':id')}}';
-        url = url.replace(':id', id);
-
-        $('#modelHeading').html('Event');
-        $.ajaxModal('#eventDetailModal', url);
-    }
-
-    var calendarLocale = '{{ $global->locale }}';
-</script>
-
-<script src="{{ asset('plugins/bower_components/calendar/jquery-ui.min.js') }}"></script>
-<script src="{{ asset('plugins/bower_components/moment/moment.js') }}"></script>
-<script src="{{ asset('plugins/bower_components/calendar/dist/fullcalendar.min.js') }}"></script>
-<script src="{{ asset('plugins/bower_components/calendar/dist/jquery.fullcalendar.js') }}"></script>
-<script src="{{ asset('plugins/bower_components/calendar/dist/locale-all.js') }}"></script>
-<script src="{{ asset('js/event-calendar.js') }}"></script>
-
-<script src="{{ asset('plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-<script src="{{ asset('plugins/bower_components/timepicker/bootstrap-timepicker.min.js') }}"></script>
-
-<script src="{{ asset('js/cbpFWTabs.js') }}"></script>
-<script src="{{ asset('plugins/bower_components/custom-select/custom-select.min.js') }}"></script>
-<script src="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.js') }}"></script>
-<script src="{{ asset('plugins/bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
-<script src="{{ asset('plugins/bootstrap-colorselector/bootstrap-colorselector.min.js') }}"></script>
-
-<script>
-    jQuery('#start_date, #end_date').datepicker({
-        autoclose: true,
-        todayHighlight: true,
-        format: '{{ $global->date_picker_format }}',
-    })
-
-    $('#colorselector').colorselector();
-
-    $('#start_time, #end_time').timepicker({
-        @if($global->time_format == 'H:i')
-        showMeridian: false,
-        @endif
-    });
-
-    $(".select2").select2({
-        formatNoMatches: function () {
-            return "{{ __('messages.noRecordFound') }}";
-        }
-    });
-
-    function addEventModal(start, end, allDay){
-        if(start){
-            // var sd = new Date(start);
-            // var curr_date = sd.getDate();
-            // if(curr_date < 10){
-            //     curr_date = '0'+curr_date;
-            // }
-            // var curr_month = sd.getMonth();
-            // curr_month = curr_month+1;
-            // if(curr_month < 10){
-            //     curr_month = '0'+curr_month;
-            // }
-            // var curr_year = sd.getFullYear();
-
-            // $('#start_date').val(curr_month+'/'+curr_date+'/'+curr_year);
-
-            // var ed = new Date(start);
-            // var curr_date = sd.getDate();
-            // if(curr_date < 10){
-            //     curr_date = '0'+curr_date;
-            // }
-            // var curr_month = sd.getMonth();
-            // curr_month = curr_month+1;
-            // if(curr_month < 10){
-            //     curr_month = '0'+curr_month;
-            // }
-            // var curr_year = ed.getFullYear();
-            // $('#end_date').val(curr_month+'/'+curr_date+'/'+curr_year);
-
-            $('#start_date, #end_date').datepicker('destroy');
-            jQuery('#start_date, #end_date').datepicker({
-                autoclose: true,
-                todayHighlight: true,
-                format: '{{ $global->date_picker_format }}'
-            })
-
-            jQuery('#start_date').datepicker('setDate', new Date(start));
-            jQuery('#end_date').datepicker('setDate', new Date(start));
-
+            $('#modelHeading').html('Event');
+            $.ajaxModal('#eventDetailModal', url);
         }
 
-        $('#my-event').modal('show');
+        var calendarLocale = '{{ $global->locale }}';
+    </script>
 
-    }
+{{--    <script src="{{ asset('plugins/bower_components/calendar/jquery-ui.min.js') }}"></script>--}}
+{{--    <script src="{{ asset('plugins/bower_components/moment/moment.js') }}"></script>--}}
+{{--    <script src="{{ asset('plugins/bower_components/calendar/dist/fullcalendar.min.js') }}"></script>--}}
+{{--    <script src="{{ asset('plugins/bower_components/calendar/dist/jquery.fullcalendar.js') }}"></script>--}}
+{{--    <script src="{{ asset('plugins/bower_components/calendar/dist/locale-all.js') }}"></script>--}}
+    <script src="{{ asset('js/event-calendar.js') }}"></script>
 
-    $('.save-event').click(function () {
-        $.easyAjax({
-            url: '{{route('admin.events.store')}}',
-            container: '#modal-data-application',
-            type: "POST",
-            data: $('#createEvent').serialize(),
-            success: function (response) {
-                if(response.status == 'success'){
-                    window.location.reload();
+    <script src="{{ asset('plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+    <script src="{{ asset('plugins/bower_components/timepicker/bootstrap-timepicker.min.js') }}"></script>
+
+    <script src="{{ asset('js/cbpFWTabs.js') }}"></script>
+    <script src="{{ asset('plugins/bower_components/custom-select/custom-select.min.js') }}"></script>
+    <script src="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('plugins/bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap-colorselector/bootstrap-colorselector.min.js') }}"></script>
+
+    <script>
+        jQuery('#start_date, #end_date').datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            format: '{{ $global->date_picker_format }}',
+        })
+
+        $('#colorselector').colorselector();
+
+        $('#start_time, #end_time').timepicker({
+            @if($global->time_format == 'H:i')
+            showMeridian: false,
+            @endif
+        });
+
+        $(".select2").select2({
+            formatNoMatches: function () {
+                return "{{ __('messages.noRecordFound') }}";
+            }
+        });
+
+        function addEventModal(start, end, allDay){
+            if(start){
+                // var sd = new Date(start);
+                // var curr_date = sd.getDate();
+                // if(curr_date < 10){
+                //     curr_date = '0'+curr_date;
+                // }
+                // var curr_month = sd.getMonth();
+                // curr_month = curr_month+1;
+                // if(curr_month < 10){
+                //     curr_month = '0'+curr_month;
+                // }
+                // var curr_year = sd.getFullYear();
+
+                // $('#start_date').val(curr_month+'/'+curr_date+'/'+curr_year);
+
+                // var ed = new Date(start);
+                // var curr_date = sd.getDate();
+                // if(curr_date < 10){
+                //     curr_date = '0'+curr_date;
+                // }
+                // var curr_month = sd.getMonth();
+                // curr_month = curr_month+1;
+                // if(curr_month < 10){
+                //     curr_month = '0'+curr_month;
+                // }
+                // var curr_year = ed.getFullYear();
+                // $('#end_date').val(curr_month+'/'+curr_date+'/'+curr_year);
+
+                $('#start_date, #end_date').datepicker('destroy');
+                jQuery('#start_date, #end_date').datepicker({
+                    autoclose: true,
+                    todayHighlight: true,
+                    format: '{{ $global->date_picker_format }}'
+                })
+
+                jQuery('#start_date').datepicker('setDate', new Date(start));
+                jQuery('#end_date').datepicker('setDate', new Date(start));
+
+            }
+
+            $('#my-event').modal('show');
+
+        }
+
+        $('.save-event').click(function () {
+            $.easyAjax({
+                url: '{{route('admin.events.store')}}',
+                container: '#modal-data-application',
+                type: "POST",
+                data: $('#createEvent').serialize(),
+                success: function (response) {
+                    if(response.status == 'success'){
+                        window.location.reload();
+                    }
                 }
+            })
+        })
+
+        $('#repeat-event').change(function () {
+            if($(this).is(':checked')){
+                $('#repeat-fields').show();
+            }
+            else{
+                $('#repeat-fields').hide();
             }
         })
-    })
 
-    $('#repeat-event').change(function () {
-        if($(this).is(':checked')){
-            $('#repeat-fields').show();
-        }
-        else{
-            $('#repeat-fields').hide();
-        }
-    })
+        $('#send_reminder').change(function () {
+            if($(this).is(':checked')){
+                $('#reminder-fields').show();
+            }
+            else{
+                $('#reminder-fields').hide();
+            }
+        })
 
-    $('#send_reminder').change(function () {
-        if($(this).is(':checked')){
-            $('#reminder-fields').show();
-        }
-        else{
-            $('#reminder-fields').hide();
-        }
-    })
-
-</script>
-
+    </script>
 @endpush
