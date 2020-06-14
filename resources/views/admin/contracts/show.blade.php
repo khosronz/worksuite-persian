@@ -339,8 +339,8 @@
 <script src="{{ asset('js/cbpFWTabs.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/icheck/icheck.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/icheck/icheck.init.js') }}"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<script src="{{asset('datatables/js/jquery-ui.js')}}"></script>
+<script src="{{asset('datatables/js/signature_pad.min.js')}}"></script>
 
 <script>
     $(document).ready(() => {

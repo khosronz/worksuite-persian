@@ -31,9 +31,9 @@
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel='stylesheet prefetch'
-          href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css'>
+          href='{{asset('datatables/css/flag-icon.min.css')}}'>
     <link rel='stylesheet prefetch'
-          href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css'>
+          href='{{asset('datatables/css/bootstrap-select.min.css')}}'>
 
     <!-- This is Sidebar menu CSS -->
     <link href="{{ asset('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
@@ -58,8 +58,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="{{asset('datatables/js/html5shiv.js')}}"></script>
+    <script src="{{asset('datatables/js/respond.min.js')}}"></script>
     <![endif]-->
 
     <style>
@@ -298,8 +298,8 @@
 <script src="{{ asset('js/cbpFWTabs.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/icheck/icheck.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/icheck/icheck.init.js') }}"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js"></script>
+<script src="{{asset('datatables/js/jquery-ui.js')}}"></script>
+<script src="{{asset('datatables/js/signature_pad.min.js')}}"></script>
 
 <script>
     //Decline estimate

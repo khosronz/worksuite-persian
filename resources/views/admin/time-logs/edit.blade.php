@@ -135,7 +135,7 @@
 @push('footer-script')
     <script src="{{ asset('plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('plugins/bower_components/timepicker/bootstrap-timepicker.min.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
+    <script src="{{asset('datatables/js/moment.min.js')}}"></script>
 
     <script>
         $("#end_date, #start_date, .date-picker").datepicker({

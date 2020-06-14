@@ -134,7 +134,7 @@
 <script src="{{ asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/custom-select/custom-select.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.js') }}"></script>
-<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+<script src="{{asset('datatables/js/dataTables.buttons.min.js')}}"></script>
 <script src="{{ asset('js/datatables/buttons.server-side.js') }}"></script>
 
 {!! $dataTable->scripts() !!}
