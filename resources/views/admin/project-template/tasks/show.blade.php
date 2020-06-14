@@ -25,8 +25,8 @@
 <link rel="stylesheet" href="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/bower_components/multiselect/css/multi-select.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/bower_components/summernote/dist/summernote.css') }}">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="{{asset('datatables/css/dataTables.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('datatables/css/buttons.dataTables.min.css')}}">
 
 @endpush
 
@@ -208,11 +208,11 @@
 <script src="{{ asset('plugins/bower_components/custom-select/custom-select.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/summernote/dist/summernote.min.js') }}"></script>
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{{asset('datatables/js/jquery-ui.js')}}"></script>
 <script src="{{ asset('plugins/bower_components/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+<script src="{{asset('datatables/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('datatables/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 <script type="text/javascript">
     var newTaskpanel = $('#new-task-panel');
     var taskListPanel = $('#task-list-panel');

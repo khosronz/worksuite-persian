@@ -31,9 +31,9 @@
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel='stylesheet prefetch'
-          href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css'>
+          href='{{asset('datatables/css/flag-icon.min.css')}}'>
     <link rel='stylesheet prefetch'
-          href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css'>
+          href={{asset('datatables/css/bootstrap-select.min.css')}}'>
 
     <!-- This is Sidebar menu CSS -->
     <link href="{{ asset('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
@@ -114,7 +114,7 @@
 <script src="{{ asset('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js'></script>
+<script src='{{asset('datatables/js/bootstrap-select.min.js')}}'></script>
 
 <!-- Sidebar menu plugin JavaScript -->
 <script src="{{ asset('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
