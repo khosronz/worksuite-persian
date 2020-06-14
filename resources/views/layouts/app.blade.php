@@ -31,9 +31,9 @@
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('plugins/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel='stylesheet prefetch'
-          href='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css'>
+          href='{{asset('datatables/css/flag-icon.min.css')}}'>
     <link rel='stylesheet prefetch'
-          href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css'>
+          href='{{asset('datatables/css/bootstrap-select.min.css')}}'>
 
     <!-- This is Sidebar menu CSS -->
     <link href="{{ asset('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
@@ -76,7 +76,7 @@
 
     @if($pushSetting->status == 'active')
     <link rel="manifest" href="{{ asset('manifest.json') }}" />
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async='async'></script>
+    <script src="{{asset('datatables/js/OneSignalSDK.js')}}" async='async'></script>
     <script>
         var OneSignal = window.OneSignal || [];
         OneSignal.push(function() {
@@ -564,7 +564,7 @@
 <script src="{{ asset('js/jquery.magnific-popup.min.js') }}"></script>
 <script src="{{ asset('js/jquery.magnific-popup-init.js') }}"></script>
 
-<script src="https://js.pusher.com/5.0/pusher.min.js"></script>
+<script src="{{asset('datatables/js/pusher.min.js')}}"></script>
 
 <script>
 
