@@ -173,7 +173,7 @@
 <script src="{{ asset('plugins/bower_components/custom-select/custom-select.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.js') }}"></script>
 
-<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="{{asset('datatables/js/jquery-ui.js')}}"></script>
 <script src="{{ asset('plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 <script type="text/javascript">
     //    (function () {
