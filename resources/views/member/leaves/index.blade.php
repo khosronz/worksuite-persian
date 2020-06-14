@@ -31,9 +31,9 @@
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap-colorselector/bootstrap-colorselector.min.css') }}">
 
 <link rel="stylesheet" href="{{ asset('plugins/bower_components/morrisjs/morris.css') }}">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
-<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="{{asset('datatables/css/dataTables.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('datatables/css/responsive.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('datatables/css/buttons.dataTables.min.css')}}">
 @endpush
 
 @section('content')
@@ -254,7 +254,7 @@
 <script src="{{ asset('plugins/bower_components/peity/jquery.peity.init.js') }}"></script>
 
 <script src="{{ asset('plugins/bower_components/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+<script src="{{asset('datatables/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('datatables/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 @endpush

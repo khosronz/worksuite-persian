@@ -171,7 +171,7 @@
 
 <script src="{{ asset('plugins/bower_components/moment/moment.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/summernote/dist/summernote.min.js') }}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="{{asset('datatables/js/sweetalert.min.js')}}"></script>
 
 <script src="{{ asset('plugins/bower_components/peity/jquery.peity.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/peity/jquery.peity.init.js') }}"></script>

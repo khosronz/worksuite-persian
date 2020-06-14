@@ -22,10 +22,10 @@
 @endsection
 
 @push('head-script')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css">
-<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
-<link rel="stylesheet" href="//cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css">
+<link rel="stylesheet" href="{{asset('datatables/css/dataTables.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('datatables/css/responsive.bootstrap.min.css')}}">
+<link rel="stylesheet" href="{{asset('datatables/css/buttons.dataTables.min.css')}}">
+<link rel="stylesheet" href="{{asset('datatables/css/buttons.dataTables.min.css')}}">
 <link rel="stylesheet" href="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/bower_components/custom-select/custom-select.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/bower_components/multiselect/css/multi-select.css') }}">
@@ -105,9 +105,9 @@
 
 @push('footer-script')
 <script src="{{ asset('plugins/bower_components/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
-<script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
+<script src="{{asset('datatables/js/dataTables.bootstrap.min.js')}}"></script>
+<script src="{{asset('datatables/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 <script src="{{ asset('plugins/bower_components/custom-select/custom-select.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/bootstrap-select/bootstrap-select.min.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/multiselect/js/jquery.multi-select.js') }}"></script>
