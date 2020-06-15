@@ -530,11 +530,11 @@
 
 <!-- jQuery -->
 <script src="{{ asset('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="{{ asset('datatables/js/jquery-ui.min.js') }}"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src='//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/js/bootstrap-select.min.js'></script>
+<script src='{{ asset('datatables/js/bootstrap-select.min.js') }}'></script>
 
 <!-- Sidebar menu plugin JavaScript -->
 <script src="{{ asset('plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>

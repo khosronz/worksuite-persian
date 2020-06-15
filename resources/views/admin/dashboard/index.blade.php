@@ -2,6 +2,7 @@
 
 
 @push('head-script')
+    <script src="{{ asset('datatables/js/jquery-ui.min.js') }}"></script>
     <style>
         .list-group{
             margin-bottom:0px !important;
