@@ -2,7 +2,8 @@
 
 
 @push('head-script')
-    <script src="{{ asset('datatables/js/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('datatables/js/jquery-ui.js') }}"></script>
     <style>
         .list-group{
             margin-bottom:0px !important;

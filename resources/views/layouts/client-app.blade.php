@@ -475,7 +475,7 @@
 
 <!-- jQuery -->
 <script src="{{ asset('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset('datatables/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('datatables/js/jquery-ui.js') }}"></script>
 
 <!-- Bootstrap Core JavaScript -->
 <script src="{{ asset('plugins/bootstrap/dist/js/bootstrap.min.js') }}"></script>

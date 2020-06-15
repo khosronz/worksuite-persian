@@ -1,4 +1,5 @@
-<script src="{{ asset('datatables/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('datatables/js/jquery-ui.js') }}"></script>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h4 class="modal-title">@lang('modules.tasks.subTask')</h4>
