@@ -116,9 +116,11 @@
 <script src="{{asset('datatables/js/responsive.bootstrap.min.js')}}"></script>
 <script src="{{ asset('plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 @if($global->locale == 'en')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.{{ $global->locale }}-AU.min.js"></script>
+    <script src="{{asset('datatables/bootstrap-datepicker/js/bootstrap-datepicker'.'.'.$global->locale.'-AU.min.js')}}"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.{{ $global->locale }}-AU.min.js"></script>--}}
 @else
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.{{ $global->locale }}.min.js"></script>
+    <script src="{{asset('datatables/bootstrap-datepicker/js/bootstrap-datepicker'.'.'.$global->locale.'.min.js')}}"></script>
+{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/locales/bootstrap-datepicker.{{ $global->locale }}.min.js"></script>--}}
 @endif
 <script src="{{ asset('plugins/bower_components/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 <script src="{{ asset('plugins/bower_components/custom-select/custom-select.min.js') }}"></script>
