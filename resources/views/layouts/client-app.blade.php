@@ -281,7 +281,7 @@
     }
 </style>
 
-
+    <link href="{{ asset('fonts/Iransans/main.css') }}" rel="stylesheet">
 </head>
 <body class="fix-sidebar">
 <!-- Preloader -->

@@ -655,7 +655,7 @@ return array (
     'halfDayMarkTime' => 'زمان علامت گذاری HalfDay',
     'lateMark' => 'علامت دیر پس از (دقیقه)',
     'allowSelfClock' => 'مجاز به کار خود ساعت کار / ساعت-خارج',
-    'markAttendance' => 'حضور در مارک',
+    'markAttendance' => 'انتخاب به عنوان حاضر',
     'clock_in' => 'ساعت ورود',
     'late' => 'دیر',
     'clock_out' => 'پایان وقت',

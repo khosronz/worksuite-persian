@@ -44,7 +44,7 @@
             background: {{ $setting->logo_background_color }};
         }
     </style>
-
+    <link href="{{ asset('fonts/Iransans/main.css') }}" rel="stylesheet">
 </head>
 <body>
 
