@@ -7,7 +7,7 @@
 //--------------------------------------------------------------------------------------------------
 
 // PHP will fatal error if we attempt to use the DateTime class without this being set.
-date_default_timezone_set('UTC');
+date_default_timezone_set('Asia/Tehran');
 
 
 class Event {
@@ -111,7 +111,7 @@ class Event {
 function parseDateTime($string, $timeZone=null) {
   $date = new DateTime(
     $string,
-    $timeZone ? $timeZone : new DateTimeZone('UTC')
+    $timeZone ? $timeZone : new DateTimeZone('Asia/Tehran')
       // Used only when the string is ambiguous.
       // Ignored if string has a timeZone offset in it.
   );

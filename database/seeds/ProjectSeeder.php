@@ -253,9 +253,9 @@ class ProjectSeeder extends Seeder
         $timeLog->project_id = $project->id;
         $timeLog->user_id = $randomEmployee->id;
         $timeLog->start_time = $faker->randomElement([date('Y-m-d', strtotime( '+'.mt_rand(0,7).' days')),$faker->dateTimeThisMonth($max = 'now'), $faker->dateTimeThisYear($max = 'now')]);
-        $timeLog->start_time = Carbon::createFromFormat('Y-m-d H:i:s', $timeLog->start_time, 'Asia/Kolkata')->setTimezone('UTC');
+        $timeLog->start_time = Carbon::createFromFormat('Y-m-d H:i:s', $timeLog->start_time, 'Asia/Kolkata')->setTimezone('Asia/Tehran');
         $timeLog->end_time = $timeLog->start_time->addDays($faker->numberBetween(1, 10))->format('Y-m-d').' '.Carbon::parse('04:15 PM')->format('H:i:s');
-        $timeLog->end_time = Carbon::createFromFormat('Y-m-d H:i:s', $timeLog->end_time, 'Asia/Kolkata')->setTimezone('UTC');
+        $timeLog->end_time = Carbon::createFromFormat('Y-m-d H:i:s', $timeLog->end_time, 'Asia/Kolkata')->setTimezone('Asia/Tehran');
         $timeLog->total_hours = $timeLog->end_time->diff($timeLog->start_time)->format('%d')*24+$timeLog->end_time->diff($timeLog->start_time)->format('%H');
 
         if($timeLog->total_hours == 0){

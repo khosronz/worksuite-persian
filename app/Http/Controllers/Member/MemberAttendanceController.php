@@ -119,21 +119,21 @@ class MemberAttendanceController extends MemberBaseController
         if ($clockInCount < $this->attendanceSettings->clockin_in_day) {
 
             // Set TimeZone And Convert into timestamp
-            $currentTimestamp = $now->setTimezone('UTC');
+            $currentTimestamp = $now->setTimezone('Asia/Tehran');
             $currentTimestamp = $currentTimestamp->timestamp;;
 
             // Set TimeZone And Convert into timestamp in halfday time
             if ($this->attendanceSettings->halfday_mark_time) {
                 $halfDayTimestamp = $now->format('Y-m-d') . ' ' . $this->attendanceSettings->halfday_mark_time;
                 $halfDayTimestamp = Carbon::createFromFormat('Y-m-d H:i:s', $halfDayTimestamp, $this->global->timezone);
-                $halfDayTimestamp = $halfDayTimestamp->setTimezone('UTC');
+                $halfDayTimestamp = $halfDayTimestamp->setTimezone('Asia/Tehran');
                 $halfDayTimestamp = $halfDayTimestamp->timestamp;
             }
 
 
             $timestamp = $now->format('Y-m-d') . ' ' . $this->attendanceSettings->office_start_time;
             $officeStartTime = Carbon::createFromFormat('Y-m-d H:i:s', $timestamp, $this->global->timezone);
-            $officeStartTime = $officeStartTime->setTimezone('UTC');
+            $officeStartTime = $officeStartTime->setTimezone('Asia/Tehran');
 
 
             $lateTime = $officeStartTime->addMinutes($this->attendanceSettings->late_mark_duration);
@@ -227,11 +227,11 @@ class MemberAttendanceController extends MemberBaseController
         $attendance = Attendance::findOrFail($id);
         $date = Carbon::parse($request->attendance_date)->format('Y-m-d');
         $clockIn = Carbon::createFromFormat($this->global->time_format, $request->clock_in_time, $this->global->timezone);
-        $clockIn->setTimezone('UTC');
+        $clockIn->setTimezone('Asia/Tehran');
         $clockIn = $clockIn->format('H:i:s');
         if ($request->clock_out_time != '') {
             $clockOut = Carbon::createFromFormat($this->global->time_format, $request->clock_out_time, $this->global->timezone);
-            $clockOut->setTimezone('UTC');
+            $clockOut->setTimezone('Asia/Tehran');
             $clockOut = $clockOut->format('H:i:s');
             $clockOut = $date . ' ' . $clockOut;
         } else {
@@ -419,11 +419,11 @@ class MemberAttendanceController extends MemberBaseController
     {
         $date = Carbon::createFromFormat($this->global->date_format, $request->date)->format('Y-m-d');
         $clockIn = Carbon::createFromFormat($this->global->time_format, $request->clock_in_time, $this->global->timezone);
-        $clockIn->setTimezone('UTC');
+        $clockIn->setTimezone('Asia/Tehran');
         $clockIn = $clockIn->format('H:i:s');
         if ($request->clock_out_time != '') {
             $clockOut = Carbon::createFromFormat($this->global->time_format, $request->clock_out_time, $this->global->timezone);
-            $clockOut->setTimezone('UTC');
+            $clockOut->setTimezone('Asia/Tehran');
             $clockOut = $clockOut->format('H:i:s');
             $clockOut = $date . ' ' . $clockOut;
         } else {
@@ -683,11 +683,11 @@ class MemberAttendanceController extends MemberBaseController
 
         $date = Carbon::parse($request->attendance_date)->format('Y-m-d');
         $clockIn = Carbon::createFromFormat($this->global->time_format, $request->clock_in_time, $this->global->timezone);
-        $clockIn->setTimezone('UTC');
+        $clockIn->setTimezone('Asia/Tehran');
         $clockIn = $clockIn->format('H:i:s');
         if ($request->clock_out_time != '') {
             $clockOut = Carbon::createFromFormat($this->global->time_format, $request->clock_out_time, $this->global->timezone);
-            $clockOut->setTimezone('UTC');
+            $clockOut->setTimezone('Asia/Tehran');
             $clockOut = $clockOut->format('H:i:s');
             $clockOut = $date . ' ' . $clockOut;
         } else {

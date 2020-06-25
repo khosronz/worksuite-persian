@@ -86,11 +86,11 @@ class ManageAttendanceController extends AdminBaseController
     {
         $date = Carbon::createFromFormat($this->global->date_format, $request->date)->format('Y-m-d');
         $clockIn = Carbon::createFromFormat($this->global->time_format, $request->clock_in_time, $this->global->timezone);
-        $clockIn->setTimezone('UTC');
+        $clockIn->setTimezone('Asia/Tehran');
         $clockIn = $clockIn->format('H:i:s');
         if ($request->clock_out_time != '') {
             $clockOut = Carbon::createFromFormat($this->global->time_format, $request->clock_out_time, $this->global->timezone);
-            $clockOut->setTimezone('UTC');
+            $clockOut->setTimezone('Asia/Tehran');
             $clockOut = $clockOut->format('H:i:s');
             $clockOut = $date . ' ' . $clockOut;
         } else {
@@ -181,11 +181,11 @@ class ManageAttendanceController extends AdminBaseController
         $attendance = Attendance::findOrFail($id);
         $date = Carbon::parse($request->attendance_date)->format('Y-m-d');
         $clockIn = Carbon::createFromFormat($this->global->time_format, $request->clock_in_time, $this->global->timezone);
-        $clockIn->setTimezone('UTC');
+        $clockIn->setTimezone('Asia/Tehran');
         $clockIn = $clockIn->format('H:i:s');
         if ($request->clock_out_time != '') {
             $clockOut = Carbon::createFromFormat($this->global->time_format, $request->clock_out_time, $this->global->timezone);
-            $clockOut->setTimezone('UTC');
+            $clockOut->setTimezone('Asia/Tehran');
             $clockOut = $clockOut->format('H:i:s');
             $clockOut = $date . ' ' . $clockOut;
         } else {
@@ -521,11 +521,11 @@ class ManageAttendanceController extends AdminBaseController
     {
         $date = Carbon::parse($request->attendance_date)->format('Y-m-d');
         $clockIn = Carbon::createFromFormat($this->global->time_format, $request->clock_in_time, $this->global->timezone);
-        $clockIn->setTimezone('UTC');
+        $clockIn->setTimezone('Asia/Tehran');
         $clockIn = $clockIn->format('H:i:s');
         if ($request->clock_out_time != '') {
             $clockOut = Carbon::createFromFormat($this->global->time_format, $request->clock_out_time, $this->global->timezone);
-            $clockOut->setTimezone('UTC');
+            $clockOut->setTimezone('Asia/Tehran');
             $clockOut = $clockOut->format('H:i:s');
             $clockOut = $date . ' ' . $clockOut;
         } else {
